@@ -1391,3 +1391,16 @@ svg {
   min-height: 18px;
   font-weight: 500;
 }
+
+/* Developer Credit Link (DF Coding) */
+.developer-credit-link {
+  color: var(--color-gold-light);
+  font-weight: 600;
+  text-decoration: none;
+  transition: color var(--transition-smooth);
+}
+
+.developer-credit-link:hover {
+  color: #FFFFFF;
+  text-decoration: underline;
+}
