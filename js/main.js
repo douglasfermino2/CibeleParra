@@ -23,56 +23,87 @@ document.addEventListener('DOMContentLoaded', () => {
   const navMenu = document.getElementById('navMenu');
 
   if (mobileToggle && navMenu) {
-    mobileToggle.addEventListener('click', () => {
-      navMenu.classList.toggle('active');
+    const setMenuState = (open) => {
+      navMenu.classList.toggle('active', open);
+      mobileToggle.setAttribute('aria-expanded', String(open));
+      mobileToggle.setAttribute('aria-label', open ? 'Fechar menu de navegação' : 'Abrir menu de navegação');
       const icon = mobileToggle.querySelector('i');
       if (icon) {
-        icon.classList.toggle('fa-bars');
-        icon.classList.toggle('fa-xmark');
+        icon.classList.toggle('fa-bars', !open);
+        icon.classList.toggle('fa-xmark', open);
       }
+    };
+
+    mobileToggle.addEventListener('click', () => {
+      setMenuState(!navMenu.classList.contains('active'));
     });
 
     // Close menu when clicking link
     document.querySelectorAll('.nav-link').forEach(link => {
-      link.addEventListener('click', () => {
-        navMenu.classList.remove('active');
-        const icon = mobileToggle.querySelector('i');
-        if (icon) {
-          icon.classList.add('fa-bars');
-          icon.classList.remove('fa-xmark');
-        }
-      });
+      link.addEventListener('click', () => setMenuState(false));
+    });
+
+    // Close menu with Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+        setMenuState(false);
+        mobileToggle.focus();
+      }
     });
   }
+
+  // Decorative Font Awesome icons are hidden from screen readers
+  document.querySelectorAll('i.fa-solid, i.fa-brands, i.fa-regular').forEach(icon => {
+    icon.setAttribute('aria-hidden', 'true');
+  });
 
   // --- 3. Filterable Services Grid ---
   const filterBtns = document.querySelectorAll('.filter-btn');
   const serviceCards = document.querySelectorAll('.service-card');
 
-  filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      // Remove active class from all
-      filterBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+  const activateFilter = (btn) => {
+    filterBtns.forEach(b => {
+      const isActive = b === btn;
+      b.classList.toggle('active', isActive);
+      b.setAttribute('aria-selected', String(isActive));
+      b.setAttribute('tabindex', isActive ? '0' : '-1');
+    });
 
-      const filterValue = btn.getAttribute('data-filter');
+    const filterValue = btn.getAttribute('data-filter');
 
-      serviceCards.forEach(card => {
-        const category = card.getAttribute('data-category');
-        if (filterValue === 'all' || category === filterValue) {
-          card.style.display = 'flex';
-          setTimeout(() => {
-            card.style.opacity = '1';
-            card.style.transform = 'translateY(0)';
-          }, 50);
-        } else {
-          card.style.opacity = '0';
-          card.style.transform = 'translateY(10px)';
-          setTimeout(() => {
-            card.style.display = 'none';
-          }, 300);
-        }
-      });
+    serviceCards.forEach(card => {
+      const category = card.getAttribute('data-category');
+      if (filterValue === 'all' || category === filterValue) {
+        card.style.display = 'flex';
+        setTimeout(() => {
+          card.style.opacity = '1';
+          card.style.transform = 'translateY(0)';
+        }, 50);
+      } else {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(10px)';
+        setTimeout(() => {
+          card.style.display = 'none';
+        }, 300);
+      }
+    });
+  };
+
+  filterBtns.forEach((btn, index) => {
+    btn.addEventListener('click', () => activateFilter(btn));
+
+    // Arrow-key navigation between tabs (WAI-ARIA Tabs pattern)
+    btn.addEventListener('keydown', (e) => {
+      let next = null;
+      if (e.key === 'ArrowRight') next = filterBtns[(index + 1) % filterBtns.length];
+      if (e.key === 'ArrowLeft') next = filterBtns[(index - 1 + filterBtns.length) % filterBtns.length];
+      if (e.key === 'Home') next = filterBtns[0];
+      if (e.key === 'End') next = filterBtns[filterBtns.length - 1];
+      if (next) {
+        e.preventDefault();
+        next.focus();
+        activateFilter(next);
+      }
     });
   });
 
@@ -85,10 +116,17 @@ document.addEventListener('DOMContentLoaded', () => {
   let selectedProfile = 'Empresa (PJ)';
   let selectedArea = 'Planejamento Tributário';
 
+  const selectCard = (group, card) => {
+    group.forEach(c => {
+      const isSelected = c === card;
+      c.classList.toggle('selected', isSelected);
+      c.setAttribute('aria-pressed', String(isSelected));
+    });
+  };
+
   simProfileCards.forEach(card => {
     card.addEventListener('click', () => {
-      simProfileCards.forEach(c => c.classList.remove('selected'));
-      card.classList.add('selected');
+      selectCard(simProfileCards, card);
       selectedProfile = card.getAttribute('data-profile');
       updateSimulatorOutput();
     });
@@ -96,8 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   simAreaCards.forEach(card => {
     card.addEventListener('click', () => {
-      simAreaCards.forEach(c => c.classList.remove('selected'));
-      card.classList.add('selected');
+      selectCard(simAreaCards, card);
       selectedArea = card.getAttribute('data-area');
       updateSimulatorOutput();
     });
@@ -129,8 +166,27 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- 5. FAQ Accordion ---
   const faqItems = document.querySelectorAll('.faq-item');
 
-  faqItems.forEach(item => {
+  const syncFaqAria = () => {
+    faqItems.forEach(i => {
+      const btn = i.querySelector('.faq-question');
+      if (btn) btn.setAttribute('aria-expanded', String(i.classList.contains('active')));
+    });
+  };
+
+  faqItems.forEach((item, index) => {
     const questionBtn = item.querySelector('.faq-question');
+    const answer = item.querySelector('.faq-answer');
+    if (!questionBtn) return;
+
+    questionBtn.setAttribute('type', 'button');
+    questionBtn.id = questionBtn.id || `faq-question-${index + 1}`;
+    if (answer) {
+      answer.id = answer.id || `faq-answer-${index + 1}`;
+      answer.setAttribute('role', 'region');
+      answer.setAttribute('aria-labelledby', questionBtn.id);
+      questionBtn.setAttribute('aria-controls', answer.id);
+    }
+
     questionBtn.addEventListener('click', () => {
       const isActive = item.classList.contains('active');
 
@@ -141,8 +197,11 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!isActive) {
         item.classList.add('active');
       }
+      syncFaqAria();
     });
   });
+
+  syncFaqAria();
 
   // --- 6. Contact Form Validation & Bulletproof Input Masking ---
   const phoneInput = document.getElementById('formPhone');

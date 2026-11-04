@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#FFFFFF">
 
   <!-- Primary SEO Meta Tags -->
   <title>Cibele Parra Assessoria | Assessoria e Consultoria Contábil e Tributária</title>
@@ -151,7 +152,11 @@
     <div class="container">
       <nav class="navbar">
         <a href="#inicio" class="logo-link" title="Cibele Parra Assessoria - Página Inicial">
-          <img src="assets/logo-icon.svg" alt="Logo Cibele Parra Assessoria Contábil" class="logo-img">
+          <img src="assets/logo-icon.svg" alt="" class="logo-img">
+          <span class="logo-text-wrapper">
+            <span class="logo-name">Cibele Parra</span>
+            <span class="logo-sub">Assessoria Contábil</span>
+          </span>
         </a>
 
         <ul class="nav-menu" id="navMenu">
@@ -172,7 +177,8 @@
           </a>
         </div>
 
-        <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Abrir Menu de Navegação">
+        <button type="button" class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Abrir menu de navegação"
+          aria-expanded="false" aria-controls="navMenu">
           <i class="fa-solid fa-bars"></i>
         </button>
       </nav>
@@ -362,14 +368,14 @@
         </div>
 
         <!-- Filter Bar -->
-        <div class="services-filter-bar">
-          <button class="filter-btn active" data-filter="all">Todos os Serviços</button>
-          <button class="filter-btn" data-filter="pj">Para Empresas (PJ)</button>
-          <button class="filter-btn" data-filter="pf">Para Você (PF)</button>
+        <div class="services-filter-bar" role="tablist" aria-label="Filtrar serviços">
+          <button type="button" class="filter-btn active" role="tab" aria-selected="true" aria-controls="servicesGrid" data-filter="all">Todos os Serviços</button>
+          <button type="button" class="filter-btn" role="tab" aria-selected="false" aria-controls="servicesGrid" tabindex="-1" data-filter="pj">Para Empresas (PJ)</button>
+          <button type="button" class="filter-btn" role="tab" aria-selected="false" aria-controls="servicesGrid" tabindex="-1" data-filter="pf">Para Você (PF)</button>
         </div>
 
         <!-- Services Grid -->
-        <div class="services-grid">
+        <div class="services-grid" id="servicesGrid" role="tabpanel" aria-live="polite">
 
           <!-- 1. Planejamento Tributário para Empresas -->
           <article class="service-card" data-category="pj">
@@ -544,63 +550,63 @@
 
         <div class="simulator-card">
           <!-- Step 1: Profile -->
-          <h4 class="simulator-step-title">1. Qual é o seu Perfil?</h4>
-          <div class="sim-options-grid">
-            <div class="sim-option-card sim-profile-card selected" data-profile="Empresa (PJ)">
-              <div class="sim-option-icon"><i class="fa-solid fa-building"></i></div>
-              <div class="sim-option-text">
-                <h5>Empresa / Negócio (PJ)</h5>
-                <p>Simples, Presumido ou Lucro Real</p>
-              </div>
-            </div>
+          <h3 class="simulator-step-title" id="simStep1">1. Qual é o seu Perfil?</h3>
+          <div class="sim-options-grid" role="group" aria-labelledby="simStep1">
+            <button type="button" class="sim-option-card sim-profile-card selected" aria-pressed="true" data-profile="Empresa (PJ)">
+              <span class="sim-option-icon"><i class="fa-solid fa-building"></i></span>
+              <span class="sim-option-text">
+                <span class="sim-option-title">Empresa / Negócio (PJ)</span>
+                <span class="sim-option-desc">Simples, Presumido ou Lucro Real</span>
+              </span>
+            </button>
 
-            <div class="sim-option-card sim-profile-card" data-profile="Pessoa Física (PF)">
-              <div class="sim-option-icon"><i class="fa-solid fa-user"></i></div>
-              <div class="sim-option-text">
-                <h5>Pessoa Física / Autônomo</h5>
-                <p>IRPF, Carnê-Leão ou Investimentos</p>
-              </div>
-            </div>
+            <button type="button" class="sim-option-card sim-profile-card" aria-pressed="false" data-profile="Pessoa Física (PF)">
+              <span class="sim-option-icon"><i class="fa-solid fa-user"></i></span>
+              <span class="sim-option-text">
+                <span class="sim-option-title">Pessoa Física / Autônomo</span>
+                <span class="sim-option-desc">IRPF, Carnê-Leão ou Investimentos</span>
+              </span>
+            </button>
           </div>
 
           <!-- Step 2: Focus Area -->
-          <h4 class="simulator-step-title">2. Qual a sua Maior Necessidade Atual?</h4>
-          <div class="sim-options-grid">
-            <div class="sim-option-card sim-area-card selected" data-area="Planejamento Tributário">
-              <div class="sim-option-icon"><i class="fa-solid fa-piggy-bank"></i></div>
-              <div class="sim-option-text">
-                <h5>Reduzir Impostos</h5>
-                <p>Planejamento Tributário</p>
-              </div>
-            </div>
+          <h3 class="simulator-step-title" id="simStep2">2. Qual a sua Maior Necessidade Atual?</h3>
+          <div class="sim-options-grid" role="group" aria-labelledby="simStep2">
+            <button type="button" class="sim-option-card sim-area-card selected" aria-pressed="true" data-area="Planejamento Tributário">
+              <span class="sim-option-icon"><i class="fa-solid fa-piggy-bank"></i></span>
+              <span class="sim-option-text">
+                <span class="sim-option-title">Reduzir Impostos</span>
+                <span class="sim-option-desc">Planejamento Tributário</span>
+              </span>
+            </button>
 
-            <div class="sim-option-card sim-area-card" data-area="Negociação de Dívidas">
-              <div class="sim-option-icon"><i class="fa-solid fa-file-circle-exclamation"></i></div>
-              <div class="sim-option-text">
-                <h5>Regularizar Débitos</h5>
-                <p>Negociação com Receita/PGFN</p>
-              </div>
-            </div>
+            <button type="button" class="sim-option-card sim-area-card" aria-pressed="false" data-area="Negociação de Dívidas">
+              <span class="sim-option-icon"><i class="fa-solid fa-file-circle-exclamation"></i></span>
+              <span class="sim-option-text">
+                <span class="sim-option-title">Regularizar Débitos</span>
+                <span class="sim-option-desc">Negociação com Receita/PGFN</span>
+              </span>
+            </button>
 
-            <div class="sim-option-card sim-area-card" data-area="Gestão de Folha de Pagamento">
-              <div class="sim-option-icon"><i class="fa-solid fa-id-card"></i></div>
-              <div class="sim-option-text">
-                <h5>Folha de Pagamento</h5>
-                <p>Rotinas de Funcionários e eSocial</p>
-              </div>
-            </div>
+            <button type="button" class="sim-option-card sim-area-card" aria-pressed="false" data-area="Gestão de Folha de Pagamento">
+              <span class="sim-option-icon"><i class="fa-solid fa-id-card"></i></span>
+              <span class="sim-option-text">
+                <span class="sim-option-title">Folha de Pagamento</span>
+                <span class="sim-option-desc">Rotinas de Funcionários e eSocial</span>
+              </span>
+            </button>
 
-            <div class="sim-option-card sim-area-card" data-area="Imposto de Renda">
-              <div class="sim-option-icon"><i class="fa-solid fa-file-invoice"></i></div>
-              <div class="sim-option-text">
-                <h5>Imposto de Renda</h5>
-                <p>Declaração Anual sem Erros</p>
-              </div>
-            </div>
+            <button type="button" class="sim-option-card sim-area-card" aria-pressed="false" data-area="Imposto de Renda">
+              <span class="sim-option-icon"><i class="fa-solid fa-file-invoice"></i></span>
+              <span class="sim-option-text">
+                <span class="sim-option-title">Imposto de Renda</span>
+                <span class="sim-option-desc">Declaração Anual sem Erros</span>
+              </span>
+            </button>
           </div>
 
           <!-- Result Output -->
-          <div class="simulator-result-box" id="simResultBox">
+          <div class="simulator-result-box" id="simResultBox" aria-live="polite">
             <h4><i class="fa-solid fa-circle-check gold-text"></i> Diagnóstico Recomendado</h4>
             <p class="sim-message">
               Perfeito! Para <strong>Empresa (PJ)</strong> com foco em <strong>Planejamento Tributário</strong>, nós

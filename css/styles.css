@@ -1,33 +1,37 @@
 /* ==========================================================================
    CIBELE PARRA ASSESSORIA - DESIGN SYSTEM & STYLESHEET
-   Luxury Dark & Imperial Gold Theme | Optimized for High Performance & SEO
+   Institutional White, Navy & Antique Gold Theme | Optimized for High Performance & SEO
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
    1. COLOR PALETTE & DESIGN TOKENS
    -------------------------------------------------------------------------- */
 :root {
-  /* Color System */
-  --color-bg-main: #080A0F;
-  --color-bg-secondary: #0F131D;
-  --color-bg-card: rgba(18, 23, 34, 0.75);
-  --color-bg-card-hover: rgba(28, 35, 52, 0.85);
-  --color-bg-glass: rgba(15, 19, 29, 0.65);
+  /* Color System — Institutional White, Navy & Antique Gold (Apple Light) */
+  --color-bg-main: #FFFFFF;
+  --color-bg-secondary: #F5F7FA;
+  --color-bg-card: #FFFFFF;
+  --color-bg-card-hover: #FFFFFF;
+  --color-bg-glass: rgba(255, 255, 255, 0.82);
 
-  --color-border-subtle: rgba(212, 175, 55, 0.15);
-  --color-border-glow: rgba(212, 175, 55, 0.4);
+  --color-navy: #0B1D33;
+  --color-navy-soft: #14304F;
+  --color-champagne: #D9BC7A;
 
-  /* Imperial Gold Palette */
-  --color-gold-light: #F7E7B4;
-  --color-gold-main: #D4AF37;
-  --color-gold-dark: #997B20;
-  --color-gold-gradient: linear-gradient(135deg, #F9E4A9 0%, #D4AF37 45%, #9E7D23 100%);
-  --color-gold-text-grad: linear-gradient(135deg, #FFF1C5 0%, #E6C667 50%, #B8860B 100%);
+  --color-border-subtle: rgba(11, 29, 51, 0.10);
+  --color-border-glow: rgba(138, 102, 25, 0.45);
+
+  /* Antique Gold Palette (AA-legible on white) */
+  --color-gold-light: #7A5A14;
+  --color-gold-main: #8A6619;
+  --color-gold-dark: #6B4E10;
+  --color-gold-gradient: linear-gradient(135deg, #B8923A 0%, #8A6619 100%);
+  --color-gold-text-grad: linear-gradient(135deg, #9A7420 0%, #7A5A14 100%);
 
   /* Text Colors */
-  --color-text-title: #F8FAFC;
-  --color-text-body: #CBD5E1;
-  --color-text-muted: #94A3B8;
+  --color-text-title: #0B1D33;
+  --color-text-body: #3C4A5C;
+  --color-text-muted: #5A6778;
 
   /* Accent Colors */
   --color-whatsapp: #25D366;
@@ -68,7 +72,7 @@
 html {
   scroll-behavior: smooth;
   font-size: 16px;
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 body {
@@ -1443,4 +1447,746 @@ svg {
 .developer-credit-link:hover {
   color: #FFFFFF;
   text-decoration: underline;
+}
+
+
+
+/* ==========================================================================
+   15. APPLE HIG REFINEMENT LAYER
+   Institutional White (#FFFFFF), Navy (#0B1D33) & Antique Gold (#8A6619).
+   Liquid Glass only on the header, solid content cards, 44px touch targets,
+   >= 0.85rem text, AA contrast, visible focus & reduced-motion support.
+   ========================================================================== */
+
+:root {
+  --header-height: 76px;
+  --shadow-sm: 0 2px 8px rgba(11, 29, 51, 0.05);
+  --shadow-md: 0 16px 40px rgba(11, 29, 51, 0.08);
+  --shadow-gold: none;
+  --shadow-whatsapp: 0 6px 18px rgba(37, 211, 102, 0.28);
+}
+
+h1,
+h2,
+.section-title,
+.hero-title {
+  text-wrap: balance;
+}
+
+.gold-text {
+  background: none;
+  -webkit-text-fill-color: currentColor;
+  color: var(--color-gold-main);
+}
+
+.section-tag,
+.badge-trust {
+  background: rgba(154, 116, 32, 0.08);
+  border-color: rgba(138, 102, 25, 0.22);
+  color: var(--color-gold-light);
+  letter-spacing: 0.06em;
+}
+
+.badge-trust i,
+.section-tag i {
+  color: var(--color-gold-main);
+  flex-shrink: 0;
+}
+
+/* --- Header: the only Liquid Glass surface --- */
+.header,
+.header.scrolled {
+  background: var(--color-bg-glass);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid var(--color-border-subtle);
+  box-shadow: none;
+}
+
+.header.scrolled {
+  height: 68px;
+}
+
+.header .logo-img {
+  height: 46px;
+  filter: brightness(0.82) contrast(1.2) saturate(1.1);
+}
+
+.header.scrolled .logo-img {
+  height: 42px;
+}
+
+.logo-link:hover .logo-img {
+  transform: none;
+}
+
+.logo-text-wrapper {
+  gap: 2px;
+}
+
+.logo-name {
+  font-size: 1.2rem;
+  letter-spacing: 0.02em;
+  color: var(--color-navy);
+}
+
+.logo-sub {
+  font-size: 0.85rem;
+  letter-spacing: 0.03em;
+  text-transform: none;
+  font-weight: 500;
+  color: var(--color-gold-main);
+}
+
+.nav-menu {
+  gap: 28px;
+}
+
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 2px;
+  color: var(--color-text-body);
+}
+
+.nav-link:hover {
+  color: var(--color-navy);
+}
+
+.btn-header-wa {
+  min-height: 44px;
+  background: rgba(37, 211, 102, 0.08);
+  border: 1px solid rgba(20, 108, 58, 0.3);
+  color: #146C3A;
+}
+
+.btn-header-wa:hover {
+  background: #146C3A;
+  border-color: #146C3A;
+  color: #FFFFFF;
+  box-shadow: none;
+  transform: none;
+}
+
+.mobile-menu-toggle {
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  color: var(--color-navy);
+}
+
+/* --- Buttons --- */
+.btn {
+  min-height: 48px;
+}
+
+.btn-gold {
+  background: var(--color-navy);
+  color: #FFFFFF;
+  box-shadow: none;
+}
+
+.btn-gold:hover {
+  background: var(--color-navy-soft);
+  color: #FFFFFF;
+  transform: none;
+  box-shadow: none;
+}
+
+.btn-outline-gold {
+  background: #FFFFFF;
+  border: 1px solid rgba(11, 29, 51, 0.22);
+  color: var(--color-navy);
+}
+
+.btn-outline-gold:hover {
+  background: var(--color-bg-secondary);
+  border-color: var(--color-navy);
+  color: var(--color-navy);
+  transform: none;
+}
+
+.btn-whatsapp {
+  color: #0B1D33;
+  box-shadow: none;
+}
+
+.btn-whatsapp:hover {
+  color: #0B1D33;
+  transform: none;
+  box-shadow: none;
+}
+
+.btn:active,
+.filter-btn:active,
+.sim-option-card:active {
+  transform: scale(0.98);
+}
+
+/* --- Hero: bright institutional canvas with soft navy/gold light --- */
+.hero {
+  background:
+    radial-gradient(50% 55% at 85% 20%, rgba(11, 29, 51, 0.07) 0%, rgba(255, 255, 255, 0) 70%),
+    radial-gradient(40% 45% at 10% 10%, rgba(184, 146, 58, 0.10) 0%, rgba(255, 255, 255, 0) 70%),
+    linear-gradient(180deg, #FFFFFF 0%, #F5F7FA 100%);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.hero-glow-bg {
+  display: none;
+}
+
+.hero-description {
+  color: var(--color-text-body);
+}
+
+.hero-stats {
+  border-top: 1px solid var(--color-border-subtle);
+}
+
+.stat-item h4 {
+  color: var(--color-navy);
+}
+
+.hero-text-col > * {
+  animation: heroReveal 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+}
+
+.hero-text-col > .badge-trust { animation-delay: 0.05s; }
+.hero-text-col > .hero-title { animation-delay: 0.14s; }
+.hero-text-col > .hero-description { animation-delay: 0.24s; }
+.hero-text-col > .hero-ctas { animation-delay: 0.34s; }
+.hero-text-col > .hero-stats { animation-delay: 0.44s; }
+
+/* Navy feature card: the visual anchor of the Hero */
+.hero-card-wrapper {
+  background: linear-gradient(160deg, var(--color-navy) 0%, var(--color-navy-soft) 100%);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  border: 1px solid rgba(217, 188, 122, 0.22);
+  box-shadow: 0 24px 60px rgba(11, 29, 51, 0.22);
+  animation: heroReveal 0.95s cubic-bezier(0.2, 0.7, 0.2, 1) 0.2s backwards;
+}
+
+.hero-card-header h3,
+.hero-feature-text h5 {
+  color: #FFFFFF;
+}
+
+.hero-card-header p,
+.hero-feature-text p {
+  color: rgba(255, 255, 255, 0.74);
+}
+
+.hero-feature-icon {
+  background: rgba(217, 188, 122, 0.14);
+  border-color: rgba(217, 188, 122, 0.3);
+  color: var(--color-champagne);
+}
+
+.hero-card-wrapper .btn-gold {
+  background: var(--color-champagne);
+  color: var(--color-navy);
+}
+
+.hero-card-wrapper .btn-gold:hover {
+  background: #E6CD94;
+  color: var(--color-navy);
+}
+
+@keyframes heroReveal {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- About --- */
+.about-image-wrapper {
+  border: none;
+  box-shadow: var(--shadow-md);
+}
+
+.about-image-bg {
+  background: linear-gradient(150deg, var(--color-navy) 0%, var(--color-navy-soft) 100%);
+}
+
+.about-badge-card {
+  background: rgba(217, 188, 122, 0.08);
+  border-color: rgba(217, 188, 122, 0.25);
+}
+
+.about-badge-item i {
+  color: var(--color-champagne);
+}
+
+.about-badge-item span {
+  color: #FFFFFF;
+}
+
+.about-highlight-item i {
+  color: var(--color-gold-main);
+  flex-shrink: 0;
+}
+
+/* --- Services --- */
+.filter-btn {
+  min-height: 44px;
+  background: #FFFFFF;
+  border: 1px solid rgba(11, 29, 51, 0.14);
+  color: var(--color-text-body);
+}
+
+.filter-btn:hover {
+  border-color: var(--color-navy);
+  color: var(--color-navy);
+}
+
+.filter-btn.active {
+  background: var(--color-navy);
+  border-color: var(--color-navy);
+  color: #FFFFFF;
+  box-shadow: none;
+}
+
+.service-card {
+  background: #FFFFFF;
+  border: 1px solid var(--color-border-subtle);
+  box-shadow: var(--shadow-sm);
+}
+
+.service-card:hover {
+  transform: none;
+  background: #FFFFFF;
+  border-color: var(--color-border-glow);
+  box-shadow: var(--shadow-md);
+}
+
+.service-icon-box {
+  background: rgba(154, 116, 32, 0.08);
+  border-color: rgba(138, 102, 25, 0.18);
+  color: var(--color-gold-main);
+  flex-shrink: 0;
+}
+
+.service-category-badge {
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  color: var(--color-gold-main);
+}
+
+.service-card-bottom {
+  border-top: 1px solid var(--color-border-subtle);
+}
+
+.service-btn-wa {
+  min-height: 46px;
+  background: var(--color-bg-secondary);
+  border: 1px solid rgba(11, 29, 51, 0.08);
+  color: var(--color-navy);
+  font-size: 0.92rem;
+}
+
+.service-btn-wa i {
+  color: #1A9E4B;
+  flex-shrink: 0;
+}
+
+.service-btn-wa:hover {
+  background: var(--color-navy);
+  border-color: var(--color-navy);
+  color: #FFFFFF;
+}
+
+.service-btn-wa:hover i {
+  color: #FFFFFF;
+}
+
+/* --- Simulator --- */
+.simulator {
+  background: var(--color-bg-secondary);
+  border-top: 1px solid var(--color-border-subtle);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.simulator-card {
+  background: #FFFFFF;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  border: 1px solid var(--color-border-subtle);
+  box-shadow: var(--shadow-md);
+}
+
+.simulator-step-title {
+  color: var(--color-navy);
+}
+
+.sim-option-card {
+  width: 100%;
+  min-height: 84px;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  background: #F8FAFC;
+  border: 1px solid rgba(11, 29, 51, 0.10);
+}
+
+.sim-option-card:hover {
+  background: #FFFFFF;
+  border-color: var(--color-gold-main);
+}
+
+.sim-option-card.selected {
+  background: rgba(11, 29, 51, 0.04);
+  border-color: var(--color-navy);
+  box-shadow: inset 0 0 0 1px var(--color-navy);
+}
+
+.sim-option-icon {
+  flex-shrink: 0;
+  width: 28px;
+  text-align: center;
+  color: var(--color-gold-main);
+}
+
+.sim-option-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.sim-option-text p {
+  font-size: 0.85rem;
+}
+
+.simulator-result-box {
+  background: rgba(154, 116, 32, 0.05);
+  border: 1px solid rgba(138, 102, 25, 0.28);
+}
+
+/* --- Differentials --- */
+.diff-card {
+  background: #FFFFFF;
+  border: 1px solid var(--color-border-subtle);
+  box-shadow: var(--shadow-sm);
+}
+
+.diff-card:hover {
+  transform: none;
+  border-color: var(--color-border-glow);
+}
+
+.diff-icon {
+  background: var(--color-navy);
+  color: var(--color-champagne);
+  flex-shrink: 0;
+}
+
+/* --- FAQ --- */
+.faq {
+  background: #FFFFFF;
+}
+
+.faq-item {
+  background: #FFFFFF;
+}
+
+.faq-item.active {
+  border-color: var(--color-navy);
+}
+
+.faq-question {
+  min-height: 64px;
+  gap: 16px;
+}
+
+.faq-icon {
+  flex-shrink: 0;
+  color: var(--color-gold-main);
+}
+
+/* --- Contact --- */
+.contact {
+  background: var(--color-bg-secondary);
+  border-top: 1px solid var(--color-border-subtle);
+}
+
+.contact-channel-card {
+  background: #FFFFFF;
+  box-shadow: var(--shadow-sm);
+}
+
+.contact-channel-card:hover {
+  transform: none;
+  border-color: var(--color-navy);
+}
+
+.channel-icon {
+  flex-shrink: 0;
+}
+
+.channel-icon.wa {
+  color: #1A9E4B;
+}
+
+.contact-form-wrapper {
+  background: #FFFFFF;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+  min-height: 48px;
+  background: #FFFFFF;
+  border: 1px solid rgba(11, 29, 51, 0.18);
+  color: var(--color-navy);
+  font-size: 1rem;
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: #6B7685;
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  border-color: var(--color-navy);
+  box-shadow: 0 0 0 3px rgba(11, 29, 51, 0.12);
+}
+
+.field-error-msg {
+  font-size: 0.85rem;
+  color: #B91C1C;
+}
+
+.input-error {
+  border-color: #B91C1C !important;
+  box-shadow: 0 0 0 3px rgba(185, 28, 28, 0.12) !important;
+}
+
+/* --- Footer: Navy institutional base --- */
+.footer {
+  background: var(--color-navy);
+  border-top: none;
+}
+
+.footer-brand p,
+.footer-links a,
+.footer-contact-item {
+  color: rgba(255, 255, 255, 0.74);
+}
+
+.footer-col h4 {
+  color: var(--color-champagne);
+}
+
+.footer-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+}
+
+.footer-links a:hover {
+  color: #FFFFFF;
+  text-decoration: underline;
+}
+
+.footer-contact-item i {
+  color: var(--color-champagne);
+  flex-shrink: 0;
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.footer-bottom p {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.developer-credit-badge {
+  min-height: 44px;
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  color: var(--color-champagne);
+  background: rgba(217, 188, 122, 0.10);
+  border-color: rgba(217, 188, 122, 0.3);
+}
+
+.developer-credit-badge:hover {
+  background: var(--color-champagne);
+  color: var(--color-navy) !important;
+  border-color: var(--color-champagne);
+  box-shadow: none;
+  transform: none;
+}
+
+/* --- Floating WhatsApp: calm, no infinite pulse --- */
+.floating-wa-btn {
+  color: #0B1D33;
+  animation: none;
+  box-shadow: 0 8px 24px rgba(11, 29, 51, 0.18);
+}
+
+.floating-wa-btn:hover {
+  transform: scale(1.04);
+}
+
+.floating-wa-tooltip {
+  background: #FFFFFF;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  color: var(--color-navy);
+  box-shadow: var(--shadow-md);
+}
+
+/* --- Visible keyboard focus --- */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--color-navy);
+  outline-offset: 3px;
+}
+
+.hero-card-wrapper :focus-visible,
+.footer :focus-visible {
+  outline-color: var(--color-champagne);
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .badge-trust {
+    font-size: 0.85rem;
+  }
+
+  .mobile-menu-toggle {
+    display: inline-flex;
+  }
+
+  .nav-menu {
+    background: #FFFFFF;
+    gap: 4px;
+    padding: 16px 24px 24px;
+    box-shadow: var(--shadow-md);
+  }
+
+  .nav-menu li {
+    width: 100%;
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  .nav-menu li:last-child {
+    border-bottom: none;
+  }
+
+  .nav-link {
+    width: 100%;
+    min-height: 52px;
+    font-size: 1.05rem;
+  }
+
+  .header .logo-img {
+    height: 40px;
+  }
+
+  .logo-name {
+    font-size: 1.08rem;
+  }
+
+  .sim-options-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .simulator-card,
+  .contact-form-wrapper {
+    padding: 28px 18px;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+/* --- System preferences --- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .header,
+  .header.scrolled {
+    background: #FFFFFF !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+}
+
+/* Simulator option content (button-safe phrasing elements) */
+.sim-option-title {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--color-navy);
+}
+
+.sim-option-desc {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: var(--color-text-muted);
+}
+
+.sim-option-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Solid navy fallback under gradients (robust contrast) & logo hit area */
+.hero-card-wrapper,
+.about-image-bg {
+  background-color: var(--color-navy);
+}
+
+.logo-link {
+  min-height: 44px;
+}
+
+/* Crisper antique-gold monogram on the white header */
+.header .logo-img {
+  filter: brightness(0.7) contrast(1.45) saturate(1.2);
+}
+
+/* Keep footer credits clear of the floating WhatsApp button */
+.footer {
+  padding-bottom: 110px;
 }
